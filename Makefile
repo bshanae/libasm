@@ -6,6 +6,7 @@ test:
 	nasm -felf64 main/ft_read.nasm
 	nasm -felf64 main/ft_write.nasm
 	nasm -felf64 main/ft_list_push_front.nasm
+	nasm -felf64 main/ft_list_size.nasm
 
 	gcc main/main.c 				\
 		main/ft_strlen.o			\
@@ -15,6 +16,7 @@ test:
 		main/ft_read.o 		    	\
 		main/ft_write.o 			\
 		main/ft_list_push_front.o	\
+		main/ft_list_size.o	        \
 		-o test 					\
 		-no-pie
 

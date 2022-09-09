@@ -197,6 +197,16 @@ void compare_list(t_list *node, int count, ...)
 	va_end(args);
 }
 
+void asset_list_has_size(t_list *node, int expected)
+{
+	int actual = ft_list_size(node);
+	if (actual != expected)
+	{
+		printf("Expected list size to be %d, but was %d!\n", expected, actual);
+		exit(1);
+	}
+}
+
 void *allocate_int(int value)
 {
 	int *ptr = malloc(sizeof(int));
@@ -237,20 +247,49 @@ int main()
 
 	// ft_list_push_front
 
+	printf("Test on ft_list_push_front 1\n");
+
 	t_list *l1 = NULL;
 	ft_list_push_front(&l1, allocate_int(21));
 	compare_list(l1, 1, 21);
-	print_list("l1", l1);
 	free_list(l1);
+
+	printf("Test on ft_list_push_front 2\n");
 
 	t_list *l2 = build_list(1, 1);
 	compare_list(l2, 1, 1);
 	ft_list_push_front(&l2, allocate_int(21));
 	compare_list(l2, 2, 21, 1);
-	print_list("l2", l2);
 	free_list(l2);
 
+	// ft_list_size
+
+	printf("Test on ft_list_size 1\n");
+
+	t_list *l3 = NULL;
+	asset_list_has_size(l3, 0);
+
+	printf("Test on ft_list_size 2\n");
+
+	t_list *l4 = build_list(1, 292);
+	asset_list_has_size(l4, 1);
+	free_list(l4);
+
+	printf("Test on ft_list_size 3\n");
+
+	t_list *l5 = build_list(2, 292, 282);
+	asset_list_has_size(l5, 2);
+	free_list(l5);
+
+	printf("Test on ft_list_size 4\n");
+
+	t_list *l6 = build_list(5, 292, 282, 2, 5, 5);
+	asset_list_has_size(l6, 5);
+	free_list(l6);
+
 	// ft_read, ft_write
+
+	printf("Test on ft_read and ft_write\n");
 
 	char buffer[128];
 	int read;
