@@ -42,7 +42,5 @@ copy_next_char:
 			ret
 
 error_exit:
-			pop rax
-			mov rax, 0
 			ret
             

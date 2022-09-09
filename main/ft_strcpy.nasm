@@ -1,9 +1,6 @@
 global ft_strcpy
 section .text
 
-extern malloc
-extern ft_strlen
-
 ft_strcpy:
 			; rdi - destination
 			; rsi - source
