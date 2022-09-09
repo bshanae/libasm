@@ -30,8 +30,8 @@ ft_strdup:
 			push rax
 
 copy_next_char:
-			mov r8, [rdx]
-			mov [rax], r8
+			mov r8b, byte [rdx]
+			mov byte [rax], r8b
 			inc rdx
 			inc rax
 
