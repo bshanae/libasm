@@ -1,18 +1,19 @@
 void print(char *, int);
 
 #include <stdio.h>
+#include <stdlib.h>
 
-int ft_strlen(const char *str);
+char *ft_strdup(const char *str);
 
-void test_str(const char *str)
+void test_ft_strpy()
 {
-	printf("%s : %d\n", str, ft_strlen(str));
+	char *s2 = ft_strdup("hello world");
+	printf("%p: %s\n", s2, s2);
+	free(s2);
 }
 
 int main()
 {
-	test_str("");
-	test_str("bla");
-	test_str("hello");
-	test_str("hello world");
+	for (int i = 0; i < 1000; i++)
+		test_ft_strpy();
 }
