@@ -5,14 +5,17 @@ test:
 	nasm -felf64 main/ft_strdup.nasm
 	nasm -felf64 main/ft_read.nasm
 	nasm -felf64 main/ft_write.nasm
-	gcc main/main.c 			\
-		main/ft_strlen.o		\
-		main/ft_strcpy.o 		\
-		main/ft_strcmp.o 		\
-		main/ft_strdup.o 		\
-		main/ft_read.o 		    \
-		main/ft_write.o 		\
-		-o test 				\
+	nasm -felf64 main/ft_list_push_front.nasm
+
+	gcc main/main.c 				\
+		main/ft_strlen.o			\
+		main/ft_strcpy.o 			\
+		main/ft_strcmp.o 			\
+		main/ft_strdup.o 			\
+		main/ft_read.o 		    	\
+		main/ft_write.o 			\
+		main/ft_list_push_front.o	\
+		-o test 					\
 		-no-pie
 
 clean:
