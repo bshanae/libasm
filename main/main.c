@@ -9,6 +9,8 @@ int ft_strlen(const char *str);
 char *ft_strcpy(char *dest, const char *src);
 char ft_strcmp(const char *a, const char *b);
 char *ft_strdup(const char *str);
+int ft_read(int fd, const char *buffer, int buffer_size);
+void ft_write(int fd, const char *str, int size);
 
 void asset_strings_are_equal(const char *a, const char *b)
 {
@@ -97,9 +99,11 @@ int main()
 	test_ft_strcpy("hello world");
 	test_ft_strcpy("hello world hello world hello world hello world");
 
-	test_ft_strdup("");
-	test_ft_strdup("1");
-	test_ft_strdup("2");
-	test_ft_strdup("hello world");
-	test_ft_strdup("hello world hello world hello world hello world");
+	char buffer[128];
+	int read;
+	while ((read = ft_read(0, buffer, 128)) != 0)
+	{
+		ft_write(1, "$", 1);
+		ft_write(1, buffer, read);
+	}
 }
