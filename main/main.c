@@ -85,22 +85,37 @@ typedef struct s_list
 	struct s_list *next;
 } t_list;
 
-void ft_list_push_front(t_list **begin_list, void *data);
-int ft_list_size(t_list *begin_list);
-void ft_list_sort(t_list **begin_list, int (*cmp)());
-void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
+void ft_list_push_front(t_list **head_ptr, void *data);
+int ft_list_size(t_list *head_ptr);
+void ft_list_sort(t_list **head_ptr, int (*cmp)());
+void ft_list_remove_if(t_list **head_ptr, void *data_ref, int (*cmp)());
 
-void _ft_list_remove_if(t_list **node, void *data_ref, int (*cmp)())
+void _ft_list_sort(t_list **head_ptr, int (*cmp)())
 {
-	if (node == NULL)
+	ft_list_sort(head_ptr, cmp);
+	return;
+
+	if (head_ptr == NULL)
 		return;
 
-	while (*node != NULL)
+	t_list *ceiling = NULL;
+	while (*head_ptr != ceiling)
 	{
-		if (cmp((*node)->data, data_ref) == 0)
-			*node = (*node)->next;
-		else
-			node = &(*node)->next;
+		t_list *node = *head_ptr;
+		while (node->next != ceiling)
+		{
+			if (cmp(node->data, node->next->data) > 0) 
+			{
+				void *temp = node->data;
+
+				node->data = node->next->data;
+				node->next->data = temp;
+			}
+
+			node = node->next;
+		}
+
+		ceiling = node;
 	}
 }
 
@@ -313,12 +328,12 @@ int main()
 	asset_list_has_size(l6, 5);
 	free_list(l6);
 
-	// ft_list_remove_it
+	// ft_list_remove_if
 
 	printf("Test on ft_list_remove_if 1\n");
 
 	t_list *l7 = NULL;
-	_ft_list_remove_if(&l7, allocate_int_static(1), &compare_int);
+	ft_list_remove_if(&l7, allocate_int_static(1), &compare_int);
 	if (l7 == NULL)
 	{
 		printf("OK\n");
@@ -332,7 +347,7 @@ int main()
 	printf("Test on ft_list_remove_if 2\n");
 
 	t_list *l8 = build_list(1, 21);
-	_ft_list_remove_if(&l8, allocate_int_static(21), &compare_int);
+	ft_list_remove_if(&l8, allocate_int_static(21), &compare_int);
 	if (l8 == NULL)
 	{
 		printf("OK\n");
@@ -389,6 +404,68 @@ int main()
 
 	printf("OK\n");
 
+	// ft_list_sort
+
+	printf("Test on ft_list_sort 1\n");
+
+	t_list *l14 = NULL;
+	_ft_list_sort(&l14, &compare_int);
+	if (l14 == NULL)
+	{
+		printf("OK\n");
+	}
+	else
+	{
+		printf("FAILED\n");
+		exit(1);
+	}
+
+	printf("Test on ft_list_sort 2\n");
+
+	t_list *l15 = build_list(1, 1);
+	_ft_list_sort(&l15, &compare_int);
+	compare_list(l15, 1, 1);
+	free_list(l15);
+
+	printf("OK\n");
+
+	printf("Test on ft_list_sort 3\n");
+
+	t_list *l16 = build_list(2, 1, 2);
+	_ft_list_sort(&l16, &compare_int);
+	compare_list(l16, 2, 1, 2);
+	free_list(l16);
+
+	printf("OK\n");
+
+	printf("Test on ft_list_sort 4\n");
+
+	t_list *l17 = build_list(2, 2, 1);
+	_ft_list_sort(&l17, &compare_int);
+	compare_list(l17, 2, 1, 2);
+	free_list(l17);
+
+	printf("OK\n");
+
+	printf("Test on ft_list_sort 5\n");
+
+	t_list *l18 = build_list(3, 3, 2, 1);
+	print_list("l18", l18);
+	_ft_list_sort(&l18, &compare_int);
+	print_list("l18", l18);
+	compare_list(l18, 3, 1, 2, 3);
+	free_list(l18);
+
+	printf("OK\n");
+
+	printf("Test on ft_list_sort 6\n");
+
+	t_list *l19 = build_list(3, 2, 3, 1);
+	_ft_list_sort(&l19, &compare_int);
+	compare_list(l19, 3, 1, 2, 3);
+	free_list(l19);
+
+	printf("OK\n");
 
 	// ft_read, ft_write
 
