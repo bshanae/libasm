@@ -452,7 +452,6 @@ int main()
 	t_list *l18 = build_list(3, 3, 2, 1);
 	print_list("l18", l18);
 	_ft_list_sort(&l18, &compare_int);
-	print_list("l18", l18);
 	compare_list(l18, 3, 1, 2, 3);
 	free_list(l18);
 

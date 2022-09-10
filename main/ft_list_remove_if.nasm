@@ -17,23 +17,29 @@ ft_list_remove_if:
 process_node:
 			; if (*node == NULL) return
 
-			cmp qword [rdi], 0
-			je exit
-
 			mov r10, [rdi]
+
+			cmp r10, 0
+			je exit
 
 			; cmp((*node)->data, data_ref)
 
 			push rdi
+			push r10
 			push rsi
 			push rdx
+
+			sub rsp, 8
 
 			; rdi <- (**node).data
 			mov rdi, [r10]
 			call rdx
 
+			add rsp, 8
+
 			pop rdx
 			pop rsi
+			pop r10
 			pop rdi
 
 			; if (cmp(...) != 0) remove node
