@@ -90,6 +90,20 @@ int ft_list_size(t_list *begin_list);
 void ft_list_sort(t_list **begin_list, int (*cmp)());
 void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
 
+void _ft_list_remove_if(t_list **node, void *data_ref, int (*cmp)())
+{
+	if (node == NULL)
+		return;
+
+	while (*node != NULL)
+	{
+		if (cmp((*node)->data, data_ref) == 0)
+			*node = (*node)->next;
+		else
+			node = &(*node)->next;
+	}
+}
+
 t_list *alloc_list_node(void *data, size_t data_size)
 {
 	t_list *node = malloc(sizeof(t_list));
@@ -177,7 +191,7 @@ void compare_list(t_list *node, int count, ...)
 	{
 		if (node == NULL)
 		{
-			printf("Unexpedcted end of the list!");
+			printf("Unexpected end of the list!\n");
 			exit(1);
 		}
 
@@ -207,12 +221,24 @@ void asset_list_has_size(t_list *node, int expected)
 	}
 }
 
-void *allocate_int(int value)
+int *allocate_int(int value)
 {
 	int *ptr = malloc(sizeof(int));
 	*ptr = value;
 
 	return ptr;
+}
+
+int int_buffer;
+int *allocate_int_static(int value)
+{
+	int_buffer = value;
+	return &int_buffer;
+}
+
+int compare_int(int *a, int *b)
+{
+	return *a - *b;
 }
 
 void mark(int id)
@@ -286,6 +312,83 @@ int main()
 	t_list *l6 = build_list(5, 292, 282, 2, 5, 5);
 	asset_list_has_size(l6, 5);
 	free_list(l6);
+
+	// ft_list_remove_it
+
+	printf("Test on ft_list_remove_if 1\n");
+
+	t_list *l7 = NULL;
+	_ft_list_remove_if(&l7, allocate_int_static(1), &compare_int);
+	if (l7 == NULL)
+	{
+		printf("OK\n");
+	}
+	else
+	{
+		printf("FAILED\n");
+		exit(1);
+	}
+
+	printf("Test on ft_list_remove_if 2\n");
+
+	t_list *l8 = build_list(1, 21);
+	_ft_list_remove_if(&l8, allocate_int_static(21), &compare_int);
+	if (l8 == NULL)
+	{
+		printf("OK\n");
+	}
+	else
+	{
+		printf("FAILED\n");
+		exit(1);
+	}
+	free_list(l8);
+
+	printf("Test on ft_list_remove_if 3\n");
+
+	t_list *l9 = build_list(2, 1, 21);
+	ft_list_remove_if(&l9, allocate_int_static(1), &compare_int);
+	compare_list(l9, 1, 21);
+	free_list(l9);
+
+	printf("OK\n");
+
+	printf("Test on ft_list_remove_if 4\n");
+
+	t_list *l10 = build_list(2, 1, 21);
+	ft_list_remove_if(&l10, allocate_int_static(21), &compare_int);
+	compare_list(l10, 1, 1);
+	free_list(l10);
+
+	printf("OK\n");
+
+	printf("Test on ft_list_remove_if 5\n");
+
+	t_list *l11 = build_list(3, 1, 2, 3);
+	ft_list_remove_if(&l11, allocate_int_static(2), &compare_int);
+	compare_list(l11, 2, 1, 3);
+	free_list(l11);
+
+	printf("OK\n");
+
+	printf("Test on ft_list_remove_if 6\n");
+
+	t_list *l12 = build_list(3, 1, 2, 3);
+	ft_list_remove_if(&l12, allocate_int_static(3), &compare_int);
+	compare_list(l12, 2, 1, 2);
+	free_list(l12);
+
+	printf("OK\n");
+
+	printf("Test on ft_list_remove_if 7\n");
+
+	t_list *l13 = build_list(3, 1, 2, 3);
+	ft_list_remove_if(&l13, allocate_int_static(8), &compare_int);
+	compare_list(l13, 3, 1, 2, 3);
+	free_list(l13);
+
+	printf("OK\n");
+
 
 	// ft_read, ft_write
 

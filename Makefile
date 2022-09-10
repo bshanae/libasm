@@ -6,6 +6,7 @@ test:
 	nasm -felf64 main/ft_read.nasm
 	nasm -felf64 main/ft_write.nasm
 	nasm -felf64 main/ft_list_push_front.nasm
+	nasm -felf64 main/ft_list_remove_if.nasm
 	nasm -felf64 main/ft_list_size.nasm
 
 	gcc main/main.c 				\
@@ -16,6 +17,7 @@ test:
 		main/ft_read.o 		    	\
 		main/ft_write.o 			\
 		main/ft_list_push_front.o	\
+		main/ft_list_remove_if.o    \
 		main/ft_list_size.o	        \
 		-o test 					\
 		-no-pie
