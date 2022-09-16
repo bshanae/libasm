@@ -261,6 +261,22 @@ void mark(int id)
 	printf("M%d\n", id);
 }
 
+int ft_atoi_base(const char *str, int base);
+
+void test_ft_atoi_base(int test_id, const char *str, int base, int expected_result)
+{
+	printf("Test on ft_atoi_base %d\n", test_id);
+
+	int actual_result = ft_atoi_base(str, base);
+	if (actual_result != expected_result)
+	{
+		printf("Error! Expected %d, got %d.\n", expected_result, actual_result);
+		exit(1);
+	}
+
+	printf("OK\n");
+}
+
 int main()
 {
 	// ft_strcmp
@@ -465,6 +481,26 @@ int main()
 	free_list(l19);
 
 	printf("OK\n");
+
+	// ft_atoi_base
+
+	test_ft_atoi_base(1, "0", 10, 0);
+	test_ft_atoi_base(2, "1", 10, 1);
+	test_ft_atoi_base(3, "2", 10, 2);
+	test_ft_atoi_base(4, "10", 10, 10);
+	test_ft_atoi_base(5, "a", 16, 10);
+	test_ft_atoi_base(6, "A", 16, 10);
+	test_ft_atoi_base(7, "abcdef", 16, 11259375);
+	test_ft_atoi_base(8, "10", 8, 8);
+
+	test_ft_atoi_base(9, "", 10, 0);
+	test_ft_atoi_base(10, "123", 0, 0);
+	test_ft_atoi_base(11, "123", 17, 0);
+	test_ft_atoi_base(12, "123", 100, 0);
+	test_ft_atoi_base(13, "123..", 10, 0);
+	test_ft_atoi_base(14, "12.3..", 10, 0);
+	test_ft_atoi_base(15, "12_3", 10, 0);
+	test_ft_atoi_base(16, "p123", 10, 0);
 
 	// ft_read, ft_write
 

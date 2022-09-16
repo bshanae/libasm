@@ -9,6 +9,7 @@ test:
 	nasm -felf64 main/ft_list_sort.nasm
 	nasm -felf64 main/ft_list_remove_if.nasm
 	nasm -felf64 main/ft_list_size.nasm
+	nasm -felf64 main/ft_atoi_base.nasm
 
 	gcc main/main.c 				\
 		main/ft_strlen.o			\
@@ -21,6 +22,7 @@ test:
 		main/ft_list_sort.o	        \
 		main/ft_list_remove_if.o    \
 		main/ft_list_size.o	        \
+		main/ft_atoi_base.o			\
 		-o test 					\
 		-no-pie
 
