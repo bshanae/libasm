@@ -1,20 +1,20 @@
-global ft_strdup
+global _ft_strdup
 section .text
 
-extern malloc
-extern ft_strlen
+extern _malloc
+extern _ft_strlen
 
-ft_strdup:
+_ft_strdup:
 			push rdi
 
 			; compute string size
 
-			call ft_strlen
+			call _ft_strlen
 
 			; allocate memory with desired size
 
 			mov rdi, rax
-			call malloc
+			call _malloc
 
 			; check for null
 

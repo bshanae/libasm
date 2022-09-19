@@ -1,8 +1,8 @@
-global ft_atoi_base
+global _ft_atoi_base
 section .text
 
 
-ft_atoi_base:
+_ft_atoi_base:
 			; rdi : string (char ptr)
 			; esi : base (int)
 
@@ -80,6 +80,7 @@ finish_signs_processing:
 process_digits:
 			; edx : result number (long)
 
+			mov r8, [rel lookup]
 			mov edx, 0
 
 process_one_digit:
@@ -96,7 +97,7 @@ process_one_digit:
 			ja ft_atoi_base_error
 
 			; lookup digit
-			mov al, byte [lookup + eax]
+			mov al, byte [r8 + rax]
 
 			; character is not a valid digit
 			cmp al, -1

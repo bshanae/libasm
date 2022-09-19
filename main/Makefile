@@ -30,7 +30,7 @@ $(LIB): $(OBJ_DIR) $(OBJ)
 
 $(OBJ_DIR)/%.o: %.nasm
 	$(call LOG,Compiling NASM object $<)
-	$(SILENT) nasm -felf64 $< -o $@
+	$(SILENT) nasm -f macho64 $< -o $@
 
 $(OBJ_DIR):
 	$(call LOG,Creating folder $@)

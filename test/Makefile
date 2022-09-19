@@ -14,13 +14,13 @@ EXE=test_libasm
 LIBASM_DIR=../main
 LIBASM=$(LIBASM_DIR)/libasm.a
 
-CC=gcc
-CFLAGS=$(addprefix -I , $(INCL))
-LDFLAGS=-L $(LIBASM_DIR) -l asm -no-pie
+CC=clang
+CFLAGS=$(addprefix -I , $(INCL)) -arch x86_64
+LDFLAGS=-L $(LIBASM_DIR) -l asm -arch x86_64
 
 all: $(EXE)
 
-$(EXE): $(OBJ_DIR) $(OBJ) $(LIBASM)
+$(EXE): $(OBJ_DIR) $(OBJ)
 	$(call LOG,Linking executable $@)
 	$(SILENT) $(CC) $(OBJ) -o $@ $(LDFLAGS)
 
@@ -36,15 +36,12 @@ clean:
 	$(call LOG,Deleting objects)
 	$(SILENT) rm -rf $(OBJ_DIR)
 	$(call LOG,Deleting library objects)
-	$(SILENT) make clean -C $(LIBASM_DIR)
 
 fclean: clean
 	$(call LOG,Deleting objects)
 	$(SILENT) rm -rf $(OBJ_DIR)
 	$(call LOG,Deleting the executable)
 	$(SILENT) rm -f $(EXE)
-	$(call LOG,Deleting the library)
-	$(SILENT) make fclean -C $(LIBASM_DIR)
 
 
 re: fclean all

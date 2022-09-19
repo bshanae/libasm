@@ -1,16 +1,16 @@
-global ft_list_push_front
+global _ft_list_push_front
 section .text
 
-extern malloc
+extern _malloc
 
-ft_list_push_front:
+_ft_list_push_front:
 			; allocate new node
 
 			push rdi
 			push rsi
 
 			mov rdi, 16
-			call malloc
+			call _malloc
 
 			cmp rax, 0
 			je error

@@ -1,7 +1,7 @@
-global ft_write
+global _ft_write
 section .text
 
-ft_write:
+_ft_write:
 			mov rax, 1
 			syscall
 			ret

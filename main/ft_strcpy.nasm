@@ -1,7 +1,7 @@
-global ft_strcpy
+global _ft_strcpy
 section .text
 
-ft_strcpy:
+_ft_strcpy:
 			; rdi - destination
 			; rsi - source
 			; return rdi

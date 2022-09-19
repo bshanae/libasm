@@ -1,11 +1,11 @@
-global ft_strcmp
+global _ft_strcmp
 section .text
 
-ft_strcmp:
+_ft_strcmp:
 			xor rax, rax
 			xor rcx, rcx
 compare:
-			movzx eax, byte [rdi]
+			movzx eax, BYTE [rdi]
 			movzx ecx, byte [rsi]
 
 			cmp eax, 0

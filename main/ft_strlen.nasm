@@ -1,7 +1,7 @@
-global ft_strlen
+global _ft_strlen
 section .text
 
-ft_strlen:
+_ft_strlen:
             ; rdi - input string ptr
             ; rsi - copy of input string ptr, will increment it until [rsi] == 0
 

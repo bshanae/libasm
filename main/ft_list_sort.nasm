@@ -1,7 +1,7 @@
-global ft_list_sort
+global _ft_list_sort
 section .text
 
-ft_list_sort:
+_ft_list_sort:
 			; rdi - head **
 			; rsi - comparator
 

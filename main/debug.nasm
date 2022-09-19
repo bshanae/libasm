@@ -1,7 +1,7 @@
 global debug
 section .text
 
-extern printf
+extern _printf
 
 print_i_nl:
     sub rsp, 8

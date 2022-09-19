@@ -1,9 +1,9 @@
-global ft_list_remove_if
+global _ft_list_remove_if
 section .text
 
-extern free
+extern _free
 
-ft_list_remove_if:
+_ft_list_remove_if:
 			; rdi - node **
 			; r10 - node *
 			; rsi - data ref
