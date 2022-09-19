@@ -32,9 +32,6 @@ $(OBJ_DIR):
 	$(call LOG,Creating folder $@)
 	$(SILENT) mkdir $@
 
-$(LIBASM):
-	$(SILENT) make -C $(LIBASM_DIR)
-
 clean:
 	$(call LOG,Deleting objects)
 	$(SILENT) rm -rf $(OBJ_DIR)
