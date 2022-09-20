@@ -32,4 +32,6 @@ void test_ft_strdup()
 
 	for (int i = 0; i < 100; i++)
 		do_test_silenlty("djnsdlcjnsnckjsnckncjnskjncksjncksjnckjnsd");
+
+	print_ok();
 }
