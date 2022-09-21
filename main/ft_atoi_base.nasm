@@ -80,7 +80,7 @@ finish_signs_processing:
 process_digits:
 			; edx : result number (long)
 
-			mov r8, [rel lookup]
+			lea r8, [rel lookup]
 			mov edx, 0
 
 process_one_digit:
