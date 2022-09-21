@@ -14,6 +14,7 @@ _ft_strdup:
 			; allocate memory with desired size
 
 			mov rdi, rax
+			inc rdi
 			call _malloc
 
 			; check for null
@@ -35,12 +36,13 @@ copy_next_char:
 			inc rdx
 			inc rax
 
-			cmp byte [rax], 0
+			cmp byte [rdx], 0
 			jne copy_next_char
 
 			pop rax
 			ret
 
 error_exit:
+			xor rax, rax
 			ret
             
