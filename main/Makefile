@@ -14,10 +14,13 @@ SRC_BONUS=ft_atoi_base.nasm \
 		  ft_list_size.nasm \
 		  ft_list_sort.nasm
 
+SRC_DEBUG=print_i_nl.nasm print_c_nl.nasm
+
 OBJ_DIR=obj
 
 OBJ=$(patsubst %.nasm,%.o,$(addprefix $(OBJ_DIR)/,$(SRC)))
 OBJ_BONUS=$(patsubst %.nasm,%.o,$(addprefix $(OBJ_DIR)/,$(SRC_BONUS)))
+OBJ_DEBUG=$(patsubst %.nasm,%.o,$(addprefix $(OBJ_DIR)/,$(SRC_DEBUG)))
 
 LIB=libasm.a
 
@@ -36,9 +39,14 @@ $(OBJ_DIR):
 	$(call LOG,Creating folder $@)
 	$(SILENT) mkdir $@
 
-bonus: $(OBJ) $(OBJ_BONUS)
+bonus: $(OBJ_DIR) $(OBJ) $(OBJ_BONUS)
 	$(call LOG,Building static library $@)
 	$(SILENT) ar rcs $(LIB) $(OBJ) $(OBJ_BONUS)
+	$(SILENT) ranlib $(LIB)
+
+debug: $(OBJ_DIR) $(OBJ) $(OBJ_BONUS) $(OBJ_DEBUG)
+	$(call LOG,Building static library $@)
+	$(SILENT) ar rcs $(LIB) $(OBJ) $(OBJ_BONUS) $(OBJ_DEBUG)
 	$(SILENT) ranlib $(LIB)
 
 clean:

@@ -35,7 +35,6 @@ $(OBJ_DIR):
 clean:
 	$(call LOG,Deleting objects)
 	$(SILENT) rm -rf $(OBJ_DIR)
-	$(call LOG,Deleting library objects)
 
 fclean: clean
 	$(call LOG,Deleting objects)
