@@ -6,14 +6,20 @@ _ft_strcpy:
 			; rsi - source
 			; return rdi
 
+			cmp rdi, 0
+			je error
+
+			cmp rsi, 0
+			je error
+
 			push rdi
 
 copy:
-			cmp byte [rsi], 0
-			je break
-
 			mov al, byte [rsi]
 			mov byte [rdi], al
+
+			cmp byte [rsi], 0
+			je break
 
 			inc rdi
 			inc rsi
@@ -22,4 +28,7 @@ copy:
 break:
 			pop rax
 			ret
-            
+
+error:
+			xor rax, rax
+			ret

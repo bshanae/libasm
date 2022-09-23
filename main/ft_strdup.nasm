@@ -3,8 +3,12 @@ section .text
 
 extern _malloc
 extern _ft_strlen
+extern _ft_strcpy
 
 _ft_strdup:
+			cmp rdi, 0
+			je error_exit
+
 			push rdi
 
 			; compute string size
@@ -28,20 +32,12 @@ _ft_strdup:
 			; r8 - temporary character
 
 			pop rdx
-			push rax
 
-copy_next_char:
-			mov r8b, byte [rdx]
-			mov byte [rax], r8b
-			inc rdx
-			inc rax
+			mov rdi, rax
+			mov rsi, rdx
+			call _ft_strcpy
 
-			cmp byte [rdx], 0
-			jne copy_next_char
-
-			pop rax
 			ret
-
 error_exit:
 			xor rax, rax
 			ret

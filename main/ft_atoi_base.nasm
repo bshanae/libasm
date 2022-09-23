@@ -103,6 +103,9 @@ process_one_digit:
 			cmp al, -1
 			je ft_atoi_base_error
 
+			cmp al, sil
+			jae ft_atoi_base_error
+
 			imul edx, esi
 			add edx, eax
 
